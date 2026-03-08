@@ -24,6 +24,26 @@ except ImportError:
 
 def save_estimate(estimate_dict):
     """POST estimate to Save API. Returns dict with savedKey and url."""
+    import sys
+    
+    # Debug logging
+    print(f"[DEBUG save_estimate] Estimate type: {type(estimate_dict)}", file=sys.stderr)
+    print(f"[DEBUG save_estimate] Estimate keys: {list(estimate_dict.keys()) if isinstance(estimate_dict, dict) else 'N/A'}", file=sys.stderr)
+    
+    # Validate estimate structure
+    if not isinstance(estimate_dict, dict):
+        raise TypeError(f"estimate_dict must be a dict, got {type(estimate_dict).__name__}")
+    
+    # Check for required top-level keys
+    required_keys = ["name", "groups", "totalCost", "metaData"]
+    missing_keys = [k for k in required_keys if k not in estimate_dict]
+    if missing_keys:
+        print(f"[DEBUG save_estimate] Missing required keys: {missing_keys}", file=sys.stderr)
+    
+    # Log estimate size
+    estimate_json = json.dumps(estimate_dict)
+    print(f"[DEBUG save_estimate] JSON size: {len(estimate_json)} bytes", file=sys.stderr)
+    
     resp = curl_post(SAVE_API, estimate_dict)
     
     # Check for error status codes
