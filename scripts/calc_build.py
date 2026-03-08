@@ -42,9 +42,16 @@ except ImportError:
     from calc_utils import make_uuid, region_name
 
 
-def build_service(service_code, estimate_for, version, region,
-                  calculation_components, monthly_cost, service_name=None,
-                  config_summary=""):
+def build_service(
+    service_code,
+    estimate_for,
+    version,
+    region,
+    calculation_components,
+    monthly_cost,
+    service_name=None,
+    config_summary="",
+):
     """Build a single service entry for the estimate."""
     return {
         "calculationComponents": calculation_components,
@@ -150,7 +157,9 @@ def main():
     for gid, g in estimate["groups"].items():
         print(f"  {g['name']}: ${g['totalCost']['monthly']:,.2f}/mo")
         for sid, svc in g["services"].items():
-            print(f"    - {svc['serviceName']}: ${svc['serviceCost']['monthly']:,.2f}/mo")
+            print(
+                f"    - {svc['serviceName']}: ${svc['serviceCost']['monthly']:,.2f}/mo"
+            )
 
     output_path = args.output or args.spec.replace(".json", "_estimate.json")
     with open(output_path, "w") as f:

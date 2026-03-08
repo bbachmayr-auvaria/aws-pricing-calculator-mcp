@@ -24,8 +24,15 @@ except ImportError:
 
 # Component types that represent user-configurable inputs
 INPUT_TYPES = {
-    "input", "dropdown", "radioButton", "checkBox", "toggle",
-    "columnForm", "instanceSearch", "advancedPricingStrategy", "dataTransfer",
+    "input",
+    "dropdown",
+    "radioButton",
+    "checkBox",
+    "toggle",
+    "columnForm",
+    "instanceSearch",
+    "advancedPricingStrategy",
+    "dataTransfer",
 }
 
 # Sub-types that are alerts/headers, not real inputs

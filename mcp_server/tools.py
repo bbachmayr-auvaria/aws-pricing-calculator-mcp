@@ -143,6 +143,30 @@ async def save_estimate_tool(estimate: dict[str, Any]) -> dict[str, Any]:
     """
     try:
         import traceback
+        
+        # Validate estimate structure
+        if not isinstance(estimate, dict):
+            return {
+                "success": False,
+                "error": f"Invalid estimate type: expected dict, got {type(estimate).__name__}"
+            }
+        
+        # FIX: MCP protocol strips empty objects, but AWS API requires them
+        # Ensure all required top-level keys exist, even if empty
+        if "services" not in estimate:
+            estimate["services"] = {}
+        if "support" not in estimate:
+            estimate["support"] = {}
+        if "groupSubtotal" not in estimate:
+            estimate["groupSubtotal"] = {}
+        
+        # Also ensure nested group objects have required empty fields
+        for group_id, group in estimate.get("groups", {}).items():
+            if "groups" not in group:
+                group["groups"] = {}
+            if "groupSubtotal" not in group:
+                group["groupSubtotal"] = {}
+        
         result = save_estimate(estimate)
         
         # Calculate summary
