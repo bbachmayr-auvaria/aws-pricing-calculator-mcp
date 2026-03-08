@@ -31,16 +31,22 @@ pip install uv
 
 ### Run the MCP Server
 
-The server is designed to be run via `uvx` (no installation needed):
+The server is designed to be run via `uvx` directly from GitHub (no installation needed):
 
 ```bash
-uvx aws-pricing-calculator-mcp
+uvx --from git+https://github.com/YOUR_USERNAME/aws-pricing-calculator-mcp aws-pricing-calculator-mcp
 ```
 
 Or install it globally:
 
 ```bash
-uv tool install aws-pricing-calculator-mcp
+uv tool install git+https://github.com/YOUR_USERNAME/aws-pricing-calculator-mcp
+```
+
+Once published to PyPI, you can use the simpler form:
+
+```bash
+uvx aws-pricing-calculator-mcp
 ```
 
 ## Usage with Kiro
@@ -50,6 +56,20 @@ This MCP server is designed to work with the [AWS Pricing Calculator Power](http
 ### Configuration
 
 Add to your Kiro MCP configuration (`.kiro/settings/mcp.json`):
+
+```json
+{
+  "mcpServers": {
+    "aws-pricing-calculator": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/YOUR_USERNAME/aws-pricing-calculator-mcp", "aws-pricing-calculator-mcp"],
+      "disabled": false
+    }
+  }
+}
+```
+
+Or if published to PyPI:
 
 ```json
 {

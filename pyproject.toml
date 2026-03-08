@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aws-pricing-calculator-mcp"
+version = "0.1.0"
+description = "MCP server for automating AWS Pricing Calculator estimate generation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Eleftherios Chaniotakis", email = "lchanio@echyperion.com"}
+]
+keywords = ["mcp", "aws", "pricing", "calculator", "model-context-protocol"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "mcp>=0.9.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/elchanio-76/aws-pricing-calculator-mcp"
+Repository = "https://github.com/elchanio-76/aws-pricing-calculator-mcp"
+Issues = "https://github.com/elchanio-76/aws-pricing-calculator-mcp/issues"
+
+[project.scripts]
+aws-pricing-calculator-mcp = "mcp_server.server:run"
+
+[tool.setuptools.packages.find]
+include = ["mcp_server*", "scripts*"]
+
+[tool.setuptools.package-data]
+mcp_server = ["py.typed"]
