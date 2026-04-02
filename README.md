@@ -62,7 +62,7 @@ Add to your Kiro MCP configuration (`.kiro/settings/mcp.json`):
   "mcpServers": {
     "aws-pricing-calculator": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/elchanio-76/aws-pricing-calculator-mcp", "aws-pricing-calculator-mcp"],
+      "args": ["--from", "git+https://github.com/bbachmayr-auvaria/aws-pricing-calculator-mcp", "aws-pricing-calculator-mcp"],
       "disabled": false
     }
   }
